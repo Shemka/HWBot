@@ -46,7 +46,7 @@ def messages_processing(message):
                 now = datetime.datetime.now()
                 splitted_text = text.split()
                 items = [splitted_text[0].lower(), ' '.join(splitted_text[1:]), '', now.strftime('%m-%d')]
-                if len(db.get_items(items[0], 'subject')) < 1:
+                if not db.get_items(items[0], 'subject'):
                     db.update_item(items, 'subject')
                     bot.send_message(message.chat.id, 'Ладно, ладно, в последний раз добавляю коррективы в твое дз! В следующий раз не забывай ничего!')
                 else:
@@ -104,7 +104,7 @@ def messages_processing2(message):
                 splitted_text = text.split()
                 items = [splitted_text[0].lower(), ' '.join(splitted_text[1:]), message.photo[0].file_id, now.strftime('%m-%d')]
                 
-                if len(db.get_items(items[0], 'subject')) < 1:
+                if not db.get_items(items[0], 'subject'):
                     db.update_item(items, 'subject')
                     bot.send_message(message.chat.id, 'Ладно, ладно, в последний раз добавляю коррективы в твое дз! В следующий раз не забывай ничего!')
                 else:

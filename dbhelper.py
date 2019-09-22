@@ -13,7 +13,10 @@ class DBHelper:
 
     def update_item(self, items, subject_column):
         stmt = "SELECT * FROM items WHERE " + subject_column + "=" +"\'"+items[0]+"\'"
-        item_ = [list(x) for x in self.conn.execute(stmt)][0]
+        item_ = [list(x) for x in self.conn.execute(stmt)]
+        if len(item_) < 1:
+            return False
+        item_ = item_[0]
         print(item_[1], items[1])
         item_[1] += ' ' + items[1]
         item_[2] += ' ' + items[2]
